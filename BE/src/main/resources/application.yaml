@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://ssayeon-1.capvfb2duuxz.ap-northeast-1.rds.amazonaws.com:3306/ssayeon
+    username: herbi
+    password: sf0811318!
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

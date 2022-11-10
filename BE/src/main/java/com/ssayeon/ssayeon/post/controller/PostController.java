@@ -21,7 +21,8 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public ResponseEntity<Void> addPost(@Valid @RequestBody NewPostRequest newPostRequest) {
+    public ResponseEntity<Void> addPost(@Valid @ModelAttribute NewPostRequest newPostRequest) {
+        System.out.println("newPostRequest = " + newPostRequest);
         postService.addPost(newPostRequest);
         return ResponseEntity.created(URI.create("/posts")).build();
     }

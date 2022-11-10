@@ -3,8 +3,10 @@ package com.ssayeon.ssayeon.post.dto;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class NewPostRequest {
 
     @NotBlank(message = "제목은 1자 이상 50자 이하여야 합니다.")
@@ -22,4 +24,12 @@ public class NewPostRequest {
         this.imageUrl = imageUrl;
     }
 
+    @Override
+    public String toString() {
+        return "NewPostRequest{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }
