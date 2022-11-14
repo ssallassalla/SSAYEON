@@ -7,6 +7,7 @@ export default function Nav() {
     <WrapperHead>
       <StyledLink to="/">Main</StyledLink>
       <StyledLink to="/board">Board</StyledLink>
+      <StyledLink to="/write">Write</StyledLink>
     </WrapperHead>
   );
 }
