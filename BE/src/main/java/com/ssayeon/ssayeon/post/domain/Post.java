@@ -66,5 +66,17 @@ public class Post {
         return content.getValue();
     }
 
+    public void updateTitle(String title) {
+        this.title = new Title(title);
+    }
+
+    public void updateContent(String content) {
+        this.content = new Content(content);
+    }
+
+    public void updateImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 
 }

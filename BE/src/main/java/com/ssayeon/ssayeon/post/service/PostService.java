@@ -3,11 +3,15 @@ package com.ssayeon.ssayeon.post.service;
 
 import com.ssayeon.ssayeon.post.domain.Post;
 import com.ssayeon.ssayeon.post.dto.NewPostRequest;
+import com.ssayeon.ssayeon.post.dto.PostUpdateRequest;
 import com.ssayeon.ssayeon.post.dto.PostsResponse;
+import com.ssayeon.ssayeon.post.exception.PostNotFoundException;
 import com.ssayeon.ssayeon.post.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -40,5 +44,23 @@ public class PostService {
     public PostsResponse findPosts() {
         List<Post> posts = postRepository.findAll();
         return PostsResponse.ofPostList(posts);
+    }
+
+    private Post findPostObject(Long postId) {
+        return postRepository.findById(postId)
+                .orElseThrow(PostNotFoundException::new);
+    }
+    @Transactional
+    public void updatePost(Long postId, PostUpdateRequest postUpdateRequest) {
+        Post post = findPostObject(postId);
+        post.updateTitle(postUpdateRequest.getTitle());
+        post.updateContent(postUpdateRequest.getContent());
+        post.updateImageUrl(postUpdateRequest.getImageUrl());
+    }
+
+    @Transactional
+    public void deletePost(Long id) {
+        Post post = findPostObject(id);
+        postRepository.delete(post);
     }
 }
