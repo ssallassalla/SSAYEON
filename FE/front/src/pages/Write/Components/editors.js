@@ -6,8 +6,8 @@ import styled from 'styled-components';
 // import Responsive from "../common/Responsive";
 
 const Editor = () => {
-    const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
-    const quillInstance =  useRef(null); // Quill 인스턴스를 설정
+  const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
+  const quillInstance =  useRef(null); // Quill 인스턴스를 설정
     
     useEffect(() => {
     quillInstance.current = new Quill(quillElement.current, {
@@ -27,12 +27,14 @@ const Editor = () => {
 }, []);
 
 return (
-    <EditorBlock>
+    // <EditorBlock>
+    <>
       <TitleInput placeholder="제목을 입력하세요." />
       <QuillWrapper>
         <div ref={quillElement} />
       </QuillWrapper>
-    </EditorBlock>
+    {/* </EditorBlock> */}
+    </>  
   );
 };
 
