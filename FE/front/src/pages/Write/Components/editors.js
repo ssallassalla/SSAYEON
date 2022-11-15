@@ -1,71 +1,63 @@
-import React, { useRef, useEffect } from 'react';
-import Quill from 'quill';
-import 'quill/dist/quill.bubble.css';
-import styled from 'styled-components';
-// import palette from "../../lib/styles/palette";
-// import Responsive from "../common/Responsive";
+import React, { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import styled from "styled-components";
 
-const Editor = () => {
-  const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
-  const quillInstance =  useRef(null); // Quill 인스턴스를 설정
-    
-    useEffect(() => {
-    quillInstance.current = new Quill(quillElement.current, {
-      theme: 'bubble',
-      placeholder: '내용을 작성하세요...',
-      modules: {
-          // 더 많은 옵션
-          // https://quilljs.com/docs/modules/toolbar/ 참고
-          toolbar: [
-              [{ header: '1' }, { header: '2' }],
-              ['bold', 'italic', 'underline', 'strike'],
-              [{ list: 'ordered' }, { list: 'bullet' }],
-              ['blockquote', 'code-block', 'link', 'image'],
-            ],
-        },
-    });
-}, []);
-
-return (
-    // <EditorBlock>
-    <>
-      <TitleInput placeholder="제목을 입력하세요." />
-      <QuillWrapper>
-        <div ref={quillElement} />
-      </QuillWrapper>
-    {/* </EditorBlock> */}
-    </>  
-  );
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, false] }],
+    ["bold", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+    //   { indent: "-1" },
+    //   { indent: "+1" },
+    ],
+    ["link", "image"],
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    ["clean"],
+    ["code-block"]
+  ],
 };
+// 툴바 옵션 : https://quilljs.com/docs/modules/toolbar/
+const formats = [
+  //'font',
+  "header",
+  "bold",
+  "blockquote",
+  "list",
+  "bullet",
+  "image",
+  "color",
+  "background",
+  "code-block",
+];
+
+function Editor() {
+  const [value, setValue] = useState("");
+
+  const handleChange = (content, delta, source, editor) => {
+    // console.log(JSON.stringify(editor.getContents())); // delta 사용시
+    setValue(editor.getHTML());
+  };
+
+  return (
+    <Container>
+      <ReactQuill
+        style={{ width: "900px", height: "350px" }}
+        theme="snow"
+        modules={modules}
+        formats={formats}
+        value={value}
+        onChange={handleChange}
+      />
+    </Container>
+  );
+}
+
+const Container = styled.div`
+  
+  
+`;
 
 export default Editor;
-
-
-// const EditorBlock = styled(Responsive)`
-//   /* 페이지 위아래 여백 지정 */
-//   padding-top: 5rem;
-//   padding-bottom: 5rem;
-// `;
-
-const TitleInput = styled.input`
-  outline: none;
-  border: none;
-  font-size: 3rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid gray;
-  margin-bottom: 2rem;
-  width: 100%;
-`;
-
-const QuillWrapper = styled.div`
-  /* 최소 크기 지정 및 padding 제거 */
-  .ql-editor {
-    padding: 0;
-    min-height: 320px;
-    font-size: 1.125rem;
-    line-height: 1.5;
-  }
-  .ql-editor.ql-blank::before {
-    left: 0px;
-  }
-`;
