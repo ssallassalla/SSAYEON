@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BOARD_MOCK_DATA from '../../data/json_test/BOARD_MOCK_DATA.json';
-import Post from '../../components/Board/Post';
+import Post from './components/Post';
 
 export default function Board() {
   return (
