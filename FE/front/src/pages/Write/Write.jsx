@@ -1,5 +1,5 @@
 import React from 'react';
-import Editor from './Components/editors.js';
+import QuilEditor from './Components/QuilEditors.jsx';
 import styled from "styled-components";
 
 export default function Write() {
@@ -8,7 +8,7 @@ export default function Write() {
     <h2>Write</h2>
     <EditorWrap>
         <h5>body</h5>
-        <Editor/>
+        <QuilEditor/>
     </EditorWrap>
     </>
   )

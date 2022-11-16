@@ -33,7 +33,7 @@ const formats = [
   "code-block",
 ];
 
-function Editor() {
+function QuilEditor() {
   const [value, setValue] = useState("");
 
   const handleChange = (content, delta, source, editor) => {
@@ -50,6 +50,7 @@ function Editor() {
         formats={formats}
         value={value}
         onChange={handleChange}
+        placeholder = '내용을 입력하세요.'
       />
     </Container>
   );
@@ -60,4 +61,4 @@ const Container = styled.div`
   
 `;
 
-export default Editor;
+export default QuilEditor;
