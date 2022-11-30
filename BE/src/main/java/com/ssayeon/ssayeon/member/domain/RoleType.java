@@ -2,19 +2,19 @@ package com.ssayeon.ssayeon.member.domain;
 
 
 public enum RoleType {
- APPLICANT("APPLICANT"), USER("USER"), ADMIN("ADMIN");
+  APPLICANT("APPLICANT"), USER("USER"), ADMIN("ADMIN");
 
- private String name;
+  private String name;
 
- RoleType(String name) {
-  this.name = name;
- }
+  RoleType(String name) {
+    this.name = name;
+  }
 
- public String getName() {
-  return name;
- }
+  public String getName() {
+    return name;
+  }
 
- public boolean isNot(String roleType) {
-  return !this.name.equals(roleType);
- }
+  public boolean isNot(String roleType) {
+    return !this.name.equals(roleType);
+  }
 }

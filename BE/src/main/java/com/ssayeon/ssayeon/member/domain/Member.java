@@ -10,8 +10,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Builder;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Member {
 
@@ -30,9 +36,6 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private RoleType roleType = RoleType.USER;
 
-    public Member() {
-    }
-
     @Builder
     public Member(Long id, Username username, Password password) {
         this.id = id;
@@ -43,7 +46,7 @@ public class Member {
 
     public static Member applicant(Username username, Password password) {
         Member member = new Member(null, username, password);
-        member.roleType = RoleType.APPLICANT;
+        member.roleType = RoleType.USER;
         return member;
     }
 
@@ -59,6 +62,7 @@ public class Member {
     public String getUsername() {
         return username.getValue();
     }
+
 
     public String getPassword() {
         return password.getValue();
