@@ -10,42 +10,61 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
     private Long id;
 
     @Embedded
-    private Username username;
+    @Email
+    private UserEmail userEmail;
 
+    @Embedded
+    private Nickname nickname;
 
     @Embedded
     private Password password;
 
+    @Column(name="generation")
+    private String generation;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Campus campus = Campus.GWANGJU;
+
     @Enumerated(EnumType.STRING)
     private RoleType roleType = RoleType.USER;
 
-    public Member() {
-    }
 
     @Builder
-    public Member(Long id, Username username, Password password) {
+    public Member(Long id, String userEmail, String nickname, String password, String generation, String campus) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-
+        this.userEmail = new UserEmail(userEmail);
+        this.nickname = new Nickname(nickname);
+        this.password = new Password(password);
+        this.generation = generation;
+        this.campus = Campus.from(campus);
     }
 
-    public static Member applicant(Username username, Password password) {
-        Member member = new Member(null, username, password);
-        member.roleType = RoleType.APPLICANT;
-        return member;
-    }
+    //    public static Member applicant(Useremail userEmail, Password password) {
+//        Member member = new Member(null, userEmail, password);
+//        member.roleType = RoleType.APPLICANT;
+//        return member;
+//    }
 
 
     public Long getId() {
@@ -56,12 +75,9 @@ public class Member {
         return this.id.equals(id);
     }
 
-    public String getUsername() {
-        return username.getValue();
-    }
 
     public String getPassword() {
-        return password.getValue();
+        return password.getPassword();
     }
 
     public RoleType getRoleType() {
