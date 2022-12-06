@@ -1,27 +1,16 @@
 package com.ssayeon.ssayeon.member.domain;
 
 
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Member {
 
@@ -30,7 +19,6 @@ public class Member {
     private Long id;
 
     @Embedded
-    @Email
     private UserEmail userEmail;
 
     @Embedded
@@ -39,7 +27,7 @@ public class Member {
     @Embedded
     private Password password;
 
-    @Column(name="generation")
+    @Column(name = "generation")
     private String generation;
 
     @Enumerated(EnumType.STRING)
@@ -48,7 +36,6 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private RoleType roleType = RoleType.USER;
-
 
     @Builder
     public Member(Long id, String userEmail, String nickname, String password, String generation, String campus) {
@@ -60,28 +47,18 @@ public class Member {
         this.campus = Campus.from(campus);
     }
 
+    public Member(String userEmail, String nickname, String password, String generation, String campus) {
+        this(null, userEmail, nickname, password, generation, campus);
+    }
+
     //    public static Member applicant(Useremail userEmail, Password password) {
 //        Member member = new Member(null, userEmail, password);
 //        member.roleType = RoleType.APPLICANT;
 //        return member;
 //    }
 
-
-    public Long getId() {
-        return id;
-    }
-
     public boolean hasId(Long id) {
         return this.id.equals(id);
-    }
-
-
-    public String getPassword() {
-        return password.getPassword();
-    }
-
-    public RoleType getRoleType() {
-        return roleType;
     }
 
     @Override

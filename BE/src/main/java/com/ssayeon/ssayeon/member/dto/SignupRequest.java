@@ -1,18 +1,16 @@
 package com.ssayeon.ssayeon.member.dto;
 
-import com.ssayeon.ssayeon.member.domain.Campus;
-import com.ssayeon.ssayeon.member.domain.Nickname;
-import com.ssayeon.ssayeon.member.domain.Password;
-import com.ssayeon.ssayeon.member.domain.UserEmail;
-import lombok.*;
+import com.ssayeon.ssayeon.member.domain.Member;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
 @Getter
-@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SignupRequest {
 
     @NotBlank(message = "이메일 형식으로 작성해야 합니다.")
@@ -24,7 +22,7 @@ public class SignupRequest {
     @NotBlank
     private String password;
 
-//    @NotBlank
+    @NotBlank
     private String passwordConfirmation;
 
     @NotBlank(message = "기수 확인필요")
@@ -33,10 +31,6 @@ public class SignupRequest {
     @NotNull(message = "캠퍼스 확인")
     private String campus;
 
-    public SignupRequest() {
-
-    }
-
     public SignupRequest(String userEmail, String nickname, String password, String passwordConfirmation, String generation, String campus) {
         this.userEmail = userEmail;
         this.nickname = nickname;
@@ -44,5 +38,9 @@ public class SignupRequest {
         this.passwordConfirmation = passwordConfirmation;
         this.generation = generation;
         this.campus = campus;
+    }
+
+    public Member toEntity() {
+        return new Member(userEmail, nickname, password, generation, campus);
     }
 }
