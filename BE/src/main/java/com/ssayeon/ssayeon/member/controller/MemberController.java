@@ -2,13 +2,12 @@ package com.ssayeon.ssayeon.member.controller;
 
 
 import com.ssayeon.ssayeon.member.dto.SignupRequest;
+import com.ssayeon.ssayeon.member.dto.UniqueResponse;
+import com.ssayeon.ssayeon.member.repository.MemberRepository;
 import com.ssayeon.ssayeon.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -20,7 +19,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, MemberRepository memberRepository) {
         this.memberService = memberService;
     }
 
@@ -29,5 +28,19 @@ public class MemberController {
         Long id = memberService.signup(signupRequest);
         return ResponseEntity.created(URI.create("/members/" + id)).build();
     }
+
+    @GetMapping(value = "/signup/exists", params = "nickname")
+    public ResponseEntity<UniqueResponse> validateUniqueNickname(@RequestParam String nickname) {
+        UniqueResponse uniqueResponse = memberService.checkUniqueNickname(nickname);
+        return ResponseEntity.ok(uniqueResponse);
+    }
+
+    @GetMapping(value = "/signup/exists", params = "userEmail")
+    public ResponseEntity<UniqueResponse> validateUniqueUsername(@RequestParam String userEmail) {
+        UniqueResponse uniqueResponse = memberService.checkUniqueUserEmail(userEmail);
+        return ResponseEntity.ok(uniqueResponse);
+    }
+
+
 
 }
