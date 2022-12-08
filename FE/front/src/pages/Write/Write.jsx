@@ -16,5 +16,4 @@ export default function Write() {
 
 const EditorWrap = styled.div`
   padding: 20px;
-  
 `;
