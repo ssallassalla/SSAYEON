@@ -4,27 +4,28 @@ import { FaEye } from 'react-icons/fa';
 import { FaRegComment } from 'react-icons/fa';
 import { FaThumbsUp } from 'react-icons/fa';
 
-export default function Post(props) {
+export default function Post({
+  post,
+  post: { id, title, content, imageUrl, views, likes, createAt },
+}) {
   return (
     <Boards className="board">
-      {props.post.imageUrl !== null ? (
-        <Img src={props.post.imageUrl} alt="" />
-      ) : null}
-      <h3>{props.post.title}</h3>
-      <p className="content">{props.post.content}</p>
+      {imageUrl !== null ? <Img src={imageUrl} alt="" /> : null}
+      <h3>{title}</h3>
+      <p className="content">{content}</p>
 
       <div className="bot">
         <span>
-          <FaEye className="icon" /> {props.post.views}
+          <FaEye className="icon" /> {views}
         </span>
         <span>
           <FaThumbsUp className="icon" />
-          {props.post.likes}
+          {likes}
         </span>
         <span>
           <FaRegComment className="icon" /> 미정
         </span>
-        <span className="date">{props.post.createAt}</span>
+        <span className="date">{createAt}</span>
       </div>
     </Boards>
   );

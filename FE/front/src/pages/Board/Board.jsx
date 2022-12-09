@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import BOARD_MOCK_DATA from '../../data/json_test/BOARD_MOCK_DATA.json';
 import Post from '../../components/Board/Post';
 
 export default function Board() {
@@ -12,9 +11,10 @@ export default function Board() {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
-    }).then((response) => response.json())
-    // .then((data) => console.log(data))
-    .then((data) => setPosts(data.posts))
+    })
+      .then(response => response.json())
+      // .then((data) => console.log(data))
+      .then(data => setPosts(data.posts));
     // setPosts(response.data);
   };
 
@@ -29,7 +29,7 @@ export default function Board() {
       })} */}
       {/* {posts && posts} */}
       <TitleDiv>
-        {posts && posts[0].id}
+        {posts && posts.map(post => <Post key={post.id} post={post} />)}
       </TitleDiv>
     </div>
   );
