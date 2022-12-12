@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import BOARD_MOCK_DATA from '../../data/json_test/BOARD_MOCK_DATA.json';
 import Post from '../../components/Board/Post';
 
 export default function Board() {
@@ -29,7 +28,13 @@ export default function Board() {
         <div>{data}</div>
       })} */}
       {/* {posts && posts} */}
+<<<<<<< HEAD
       <TitleDiv>{posts && posts[0].id}</TitleDiv>
+=======
+      <TitleDiv>
+        {posts && posts.map(post => <Post key={post.id} post={post} />)}
+      </TitleDiv>
+>>>>>>> 7aae76e5ee5417f8b7d59f9a16c8eb2d2c9e5435
     </div>
   );
 }

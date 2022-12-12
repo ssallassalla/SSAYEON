@@ -2,7 +2,10 @@
     // "extends": ["react-app", "plugin:prettier/recommended"],
     "extends": ["react-app", "prettier"],   
     "plugins": ["prettier"],
+<<<<<<< HEAD
     "root": true,
+=======
+>>>>>>> 7aae76e5ee5417f8b7d59f9a16c8eb2d2c9e5435
     "rules": {
       "no-var": "warn", // var 금지
       // "no-multiple-empty-lines": "warn", // 여러 줄 공백 금지
