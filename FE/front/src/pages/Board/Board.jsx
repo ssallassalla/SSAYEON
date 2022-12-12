@@ -12,9 +12,10 @@ export default function Board() {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
-    }).then((response) => response.json())
-    // .then((data) => console.log(data))
-    .then((data) => setPosts(data.posts))
+    })
+      .then(response => response.json())
+      // .then((data) => console.log(data))
+      .then(data => setPosts(data.posts));
     // setPosts(response.data);
   };
 
@@ -28,9 +29,7 @@ export default function Board() {
         <div>{data}</div>
       })} */}
       {/* {posts && posts} */}
-      <TitleDiv>
-        {posts && posts[0].id}
-      </TitleDiv>
+      <TitleDiv>{posts && posts[0].id}</TitleDiv>
     </div>
   );
 }
