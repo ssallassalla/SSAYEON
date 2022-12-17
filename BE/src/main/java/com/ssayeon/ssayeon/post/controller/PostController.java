@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class PostController {
 

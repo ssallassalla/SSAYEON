@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class SignupRequest {
 
     @NotBlank(message = "이메일 형식으로 작성해야 합니다.")
-    private String userEmail;
+    private String username;
 
     @NotBlank(message = "닉네임은 1자 이상 16자 이상이여야 합니다.")
     private String nickname;
@@ -30,9 +30,10 @@ public class SignupRequest {
 
     @NotNull(message = "캠퍼스 확인")
     private String campus;
+    
 
-    public SignupRequest(String userEmail, String nickname, String password, String passwordConfirmation, String generation, String campus) {
-        this.userEmail = userEmail;
+    public SignupRequest(String username, String nickname, String password, String passwordConfirmation, String generation, String campus) {
+        this.username = username;
         this.nickname = nickname;
         this.password = password;
         this.passwordConfirmation = passwordConfirmation;
@@ -41,6 +42,6 @@ public class SignupRequest {
     }
 
     public Member toEntity() {
-        return new Member(userEmail, nickname, password, generation, campus);
+        return new Member(username, nickname, password, generation, campus);
     }
 }

@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/members")
 public class MemberController {
@@ -35,12 +36,10 @@ public class MemberController {
         return ResponseEntity.ok(uniqueResponse);
     }
 
-    @GetMapping(value = "/signup/exists", params = "userEmail")
-    public ResponseEntity<UniqueResponse> validateUniqueUsername(@RequestParam String userEmail) {
-        UniqueResponse uniqueResponse = memberService.checkUniqueUserEmail(userEmail);
+    @GetMapping(value = "/signup/exists", params = "username")
+    public ResponseEntity<UniqueResponse> validateUniqueUsername(@RequestParam String username) {
+        UniqueResponse uniqueResponse = memberService.checkUniqueUsername(username);
         return ResponseEntity.ok(uniqueResponse);
     }
-
-
 
 }

@@ -4,6 +4,8 @@ import com.ssayeon.ssayeon.member.domain.Member;
 import com.ssayeon.ssayeon.member.domain.Nickname;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
@@ -11,6 +13,10 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existsMemberByNickname(Nickname validNickname);
 
-    boolean existsMemberByUserEmailValue(String userEmail);
+    boolean existsMemberByUsernameValue(String username);
+
+    Optional<Member> findByUsernameValue(String username);
+
+    Optional<Member> findById(Long id);
 
 }

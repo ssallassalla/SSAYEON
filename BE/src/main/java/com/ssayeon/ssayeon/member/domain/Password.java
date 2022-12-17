@@ -3,7 +3,11 @@ package com.ssayeon.ssayeon.member.domain;
 import com.ssayeon.ssayeon.member.exception.InvalidPasswordFormatException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -13,6 +17,7 @@ import java.util.regex.Pattern;
 @Embeddable
 @NoArgsConstructor
 public class Password {
+
     // 영문, 숫자, 특수문자(@$!%*#?&) 포함, 8자 이상 20자 이하
     // ?=.* >> 최소 한 개 이상
     private static final Pattern PATTERN=Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$");
@@ -24,8 +29,12 @@ public class Password {
 
 
     public Password(String password) {
+
         validate(password);
-        String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+        String hashPassword = passwordEncoder.encode(password);
+//        String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         this.encodedPassword = hashPassword;
     }
 

@@ -7,16 +7,16 @@ import lombok.Getter;
 
 @Getter
 @Embeddable
-public class UserEmail {
+public class Username {
 
 
-    @Column(name = "userEmail")
+    @Column(name = "username")
     private String value;
 
-    protected UserEmail() {
+    protected Username() {
     }
 
-    public UserEmail(String value) {
+    public Username(String value) {
         this.value = value;
     }
 
@@ -39,8 +39,8 @@ public class UserEmail {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UserEmail useremail = (UserEmail) o;
-        return getValue().equals(useremail.getValue());
+        Username username = (Username) o;
+        return getValue().equals(username.getValue());
     }
 
     @Override
