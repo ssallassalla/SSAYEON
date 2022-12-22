@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PostModal from './PostModal';
+import PostModal from '../../components/Write/PostModal';
 
 function Write() {
   const [modalOpen, setModalOpen] = useState(false);
