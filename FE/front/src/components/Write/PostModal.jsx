@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PostForm from './PostForm';
-import ImagePost from './ImagePost';
+// import ImagePost from './ImagePost';
 
 function PostModal({ setModalOpen, title, content }) {
   const closeModal = () => {

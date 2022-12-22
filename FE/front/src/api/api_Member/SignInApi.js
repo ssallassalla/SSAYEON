@@ -15,6 +15,7 @@ export async function login(data) {
         // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
         // accessToken을 localStorage, cookie 등에 저장하지 않는다!
         axios.defaults.headers.common[
+          // eslint-disable-next-line
           'Authorization'
         ] = `Bearer ${accessToken}`;
 

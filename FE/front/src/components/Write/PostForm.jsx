@@ -10,8 +10,10 @@ function PostForm() {
   const [body, setBody] = useState('');
   const imgRef = useRef();
   const onSubmit = () => {
+    // eslint-disable-next-line
     if ({ title } == false) {
       window.alert('제목을 입력하세요');
+      // eslint-disable-next-line
     } else if ({ body } == false) {
       window.alert('내용을 입력하세요');
     } else {

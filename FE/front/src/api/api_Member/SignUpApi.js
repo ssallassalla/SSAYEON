@@ -17,7 +17,7 @@ export function signUp(data) {
 }
 
 export function checkEmail(data) {
-  let response = fetch(`${URL}/members/signup/exists?username=${data}`, {
+  let response = fetch(`/members/signup/exists?username=${data}`, {
     mode: 'cors',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -34,7 +34,7 @@ export function checkEmail(data) {
 }
 
 export function checkNickName(data) {
-  let response = fetch(`${URL}/members/signup/exists?nickname=${data}`, {
+  let response = fetch(`members/signup/exists?nickname=${data}`, {
     mode: 'cors',
     headers: {
       'Access-Control-Allow-Origin': '*',

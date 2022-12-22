@@ -8,9 +8,8 @@ export function fetchPosts() {
     },
   })
     .then(response => response.json())
-    .then(data => console.log(data));
-  // .then(data => {
-  //   return data.posts;
-  // });
+    .then(data => {
+      return data.posts;
+    });
   return response;
 }
