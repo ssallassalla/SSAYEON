@@ -7,9 +7,22 @@ import {
   checkNickName,
   signUp,
 } from '../../api/api_Member/SignUpApi';
+import SelectBox from '../Ui/SelectBox';
 
 export default function SignUpForm() {
   const navigate = useNavigate();
+  const OPTIONS = [
+    { value: 'GWANGJU', name: '광주' },
+    { value: 'SEOUL', name: '서울' },
+    { value: 'BUSAN', name: '부산' },
+    { value: 'DAEJEON', name: '대전' },
+    { value: 'GUMI', name: '구미' },
+  ];
+  const GENERATION = [
+    { value: '7', name: '7기' },
+    { value: '8', name: '8기' },
+    { value: '9', name: '9기' },
+  ];
 
   const [Email, setEmail] = useState('');
   const [NickName, setNickName] = useState('');
@@ -29,12 +42,13 @@ export default function SignUpForm() {
     setCheckNickName(false);
     setNickName(event.currentTarget.value);
   };
-  const onGenerationHandler = event => {
-    setGeneration(event.currentTarget.value);
-  };
-  const onCampusHandler = event => {
-    setCampus(event.currentTarget.value);
-  };
+  // const onGenerationHandler = event => {
+  //   setGeneration(event.currentTarget.value);
+  // };
+  // const onCampusHandler = event => {
+  //   console.log(event.currentTarget.value);
+  //   setCampus(event.currentTarget.value);
+  // };
   const onPasswordHandler = event => {
     setPassword(event.currentTarget.value);
   };
@@ -110,13 +124,15 @@ export default function SignUpForm() {
           )}
         </div>
         <label>Generation</label>
-        <InputField
+        <SelectBox props={GENERATION} setGeneration={setGeneration} />
+        {/* <InputField
           type="text"
           value={Generation}
           onChange={onGenerationHandler}
-        />
+        /> */}
         <label>Campus</label>
-        <InputField type="text" value={Campus} onChange={onCampusHandler} />
+        {/* <InputField type="text" value={Campus} onChange={onCampusHandler} /> */}
+        <SelectBox props={OPTIONS} setCampus={setCampus} />
         <label>Password</label>
         <InputField
           type="password"
